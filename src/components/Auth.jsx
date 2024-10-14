@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { signOutUser, signInUser, signUpUser } from "../features/auth/authSlice";
+import {
+  signOutUser,
+  signInUser,
+  signUpUser,
+} from "../features/auth/authSlice";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
@@ -10,13 +14,11 @@ const Auth = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialSignInState = searchParams.get("signin") === "true";
   const [isUser, setIsUser] = useState(initialSignInState); // Initialize based on query params
-  
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { user, loading, error } = useSelector((state) => state.auth);
-
-
 
   // Yup validation schema
   const validationSchema = Yup.object({
@@ -38,17 +40,15 @@ const Auth = () => {
     });
   };
 
-  useEffect(() => {
-    // If neither "signin" nor "signup" is present, default to "signin=true"
-    if (!searchParams.get("signin") && !searchParams.get("signup")) {
-      setSearchParams({ signin: "false" }); // Set the default query param
-      setIsUser(true); // Set the state to "signin"
-    } else {
-    //   setIsUser(initialSignInState); // Set the state based on query param
-    }
-  }, [searchParams, initialSignInState, setSearchParams]);
-
-
+  // useEffect(() => {
+  //   // If neither "signin" nor "signup" is present, default to "signin=true"
+  //   if (!searchParams.get("signin") && !searchParams.get("signup")) {
+  //     setSearchParams({ signin: "false" }); // Set the default query param
+  //     setIsUser(true); // Set the state to "signin"
+  //   } else {
+  //     //   setIsUser(initialSignInState); // Set the state based on query param
+  //   }
+  // }, [searchParams, initialSignInState, setSearchParams]);
 
   // Handle mode switch between Sign In and Sign Up
   const handleModeSwitch = () => {
