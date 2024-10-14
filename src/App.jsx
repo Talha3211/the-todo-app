@@ -14,7 +14,7 @@ function App() {
       <Router>
         {/* Navbar is placed outside the Routes so it's always displayed */}
         <TodoNavbar />
-        <div className="min-h-screen bg-gray-100 p-8 mb-0">
+        <div className="min-h-screen bg-gray-100 p-8 ">
           <Routes>
             {/* Auth Route */}
             {/* <Route path="/auth" element={<Auth />} /> */}
