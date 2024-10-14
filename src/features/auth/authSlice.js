@@ -1,12 +1,20 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { auth } from '../../firebase';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
+import { auth } from "../../firebaseConfig";
 
 export const signUpUser = createAsyncThunk(
-  'auth/signUpUser',
+  "auth/signUpUser",
   async ({ email, password }, thunkAPI) => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       return userCredential.user;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -15,10 +23,14 @@ export const signUpUser = createAsyncThunk(
 );
 
 export const signInUser = createAsyncThunk(
-  'auth/signInUser',
+  "auth/signInUser",
   async ({ email, password }, thunkAPI) => {
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       return userCredential.user;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -27,7 +39,7 @@ export const signInUser = createAsyncThunk(
 );
 
 export const signOutUser = createAsyncThunk(
-  'auth/signOutUser',
+  "auth/signOutUser",
   async (_, thunkAPI) => {
     try {
       await signOut(auth);
@@ -39,7 +51,7 @@ export const signOutUser = createAsyncThunk(
 
 // Create auth slice
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: {
     user: null,
     loading: false,
