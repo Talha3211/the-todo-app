@@ -40,28 +40,28 @@ const Auth = () => {
     });
   };
 
-  // useEffect(() => {
-  //   // If neither "signin" nor "signup" is present, default to "signin=true"
-  //   if (!searchParams.get("signin") && !searchParams.get("signup")) {
-  //     setSearchParams({ signin: "false" }); // Set the default query param
-  //     setIsUser(true); // Set the state to "signin"
-  //   } else {
-  //     //   setIsUser(initialSignInState); // Set the state based on query param
-  //   }
-  // }, [searchParams, initialSignInState, setSearchParams]);
+  useEffect(() => {
+    // If neither "signin" nor "signup" is present, default to "signin=true"
+    if (!searchParams.get("signin") && !searchParams.get("signup")) {
+      setSearchParams({ signin: "false" }); // Set the default query param
+      setIsUser(true); // Set the state to "signin"
+    } else {
+      //   setIsUser(initialSignInState); // Set the state based on query param
+    }
+  }, [searchParams, initialSignInState, setSearchParams]);
 
-  // // Handle mode switch between Sign In and Sign Up
-  // const handleModeSwitch = () => {
-  //   const newMode = !isUser;
-  //   setIsUser(newMode);
+  // Handle mode switch between Sign In and Sign Up
+  const handleModeSwitch = () => {
+    const newMode = !isUser;
+    setIsUser(newMode);
 
-  //   // Update URL based on the new mode
-  //   if (newMode) {
-  //     setSearchParams({ signin: "false" }); // Set query param to ?signin=true
-  //   } else {
-  //     setSearchParams({ signup: "false" }); // Set query param to ?signup=true
-  //   }
-  // };
+    // Update URL based on the new mode
+    if (newMode) {
+      setSearchParams({ signin: "false" }); // Set query param to ?signin=true
+    } else {
+      setSearchParams({ signup: "false" }); // Set query param to ?signup=true
+    }
+  };
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
