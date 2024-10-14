@@ -40,15 +40,15 @@ const Auth = () => {
     });
   };
 
-  // useEffect(() => {
-  //   // If neither "signin" nor "signup" is present, default to "signin=true"
-  //   if (!searchParams.get("signin") && !searchParams.get("signup")) {
-  //     setSearchParams({ signin: "false" }); // Set the default query param
-  //     setIsUser(true); // Set the state to "signin"
-  //   } else {
-  //     //   setIsUser(initialSignInState); // Set the state based on query param
-  //   }
-  // }, [searchParams, initialSignInState, setSearchParams]);
+  useEffect(() => {
+    // If neither "signin" nor "signup" is present, default to "signin=true"
+    if (!searchParams.get("signin") && !searchParams.get("signup")) {
+      setSearchParams({ signin: "false" }); // Set the default query param
+      setIsUser(true); // Set the state to "signin"
+    } else {
+      //   setIsUser(initialSignInState); // Set the state based on query param
+    }
+  }, [searchParams, initialSignInState, setSearchParams]);
 
   // Handle mode switch between Sign In and Sign Up
   const handleModeSwitch = () => {
