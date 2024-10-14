@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api"
+    }
+  ],
+  "env": {
+    "apiKey": "AIzaSyBs4a6O879XXQxqZ1HzBx7j38PmTA88_DM",
+    "authDomain": "todo-b9eae.firebaseapp.com",
+    "projectId": "todo-b9eae",
+    "storageBucket": "todo-b9eae.appspot.com",
+    "messagingSenderId": "438246449020",
+    "appId": "1:438246449020:web:e30f9b48f4ee60ca628ef9",
+    "measurementId": "G-X0Y1Y1K407"
+  }
+}
