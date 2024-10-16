@@ -73,7 +73,25 @@ const TodoNavbar = () => {
             </div>
             <div className="md:hidden flex items-center">
               <button className="text-white focus:outline-none">
-                <svg
+                {!user ? (
+                  <Link
+                    to="/auth"
+                    className="text-lg font-medium hover:bg-indigo-500 px-3 py-2 rounded-md"
+                  >
+                    Auth
+                  </Link>
+                ) : (
+                  <button
+                    onClick={() => {
+                      auth.signOut();
+                      navigate("/auth");
+                    }}
+                    className="text-lg font-medium hover:bg-indigo-500 px-3 py-2 rounded-md"
+                  >
+                    Sign Out
+                  </button>
+                )}
+                {/* <svg
                   className="h-6 w-6"
                   fill="none"
                   stroke="currentColor"
@@ -86,7 +104,7 @@ const TodoNavbar = () => {
                     strokeWidth="2"
                     d="M4 6h16M4 12h16m-7 6h7"
                   ></path>
-                </svg>
+                </svg> */}
               </button>
             </div>
           </div>
