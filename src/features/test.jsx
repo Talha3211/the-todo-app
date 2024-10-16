@@ -1,9 +1,7 @@
 // let arra = [1,2,3,4,[5,6,7,[8,9,10],11,12,13]]
 // console.log(arra.flatMap((a)=>a).flatMap((a)=>a))
 
-
 // console.log(arra.flat((4)))
-
 
 // function countOccurrences(word,string){
 //     let occrrence=0;
@@ -11,7 +9,7 @@
 //     for(let i=0;i<word.length;i++){
 
 //       if (word[i] === string){
-//           occrrence++ 
+//           occrrence++
 //         }
 
 //     }
@@ -40,9 +38,7 @@
 
 // }
 
-
 //  console.log(findMaxNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 10,1])); // 10
-
 
 // function titleCase(sentense){
 //     const tense = sentense.split(' ').map((word)=>word[0].toUpperCase() + word.slice(1))
@@ -60,24 +56,21 @@
 //     return reverseWord
 // }
 
-
 // console.log(reverseString('hello')) // 'olleh'
 
 // function isPalindrome(word){
 //     let reverseWord = ''
 //          for (let i =word.length-1;i>=0;i--){
 //             reverseWord += word[i]
-//          }    
+//          }
 
 //     return word === reverseWord
-    
+
 //     console.log(reverseWord)
 //     // return reverseWord
 // }
 
-
-
-// console.log(isPalindrome('madam'))   
+// console.log(isPalindrome('madam'))
 
 // function countVowels(word){
 //     let count = 0;
@@ -90,31 +83,28 @@
 // return count
 // }
 
-
 // console.log(countVowels('mississippi')); // 4)
 
 // function bubbleSort(arr){
 //     for (let i=0;i<arr.length;i++){
 //          for (let j=0;j<arr.length-i-1;j++){
 //              if(arr[j]>arr[j+1]){
-//               const temp = arr[j] 
+//               const temp = arr[j]
 //               arr[j]=arr[j+1]
 //               arr[j+1]=temp
 //             }
-            
+
 //         }
 //     }
 //     console.log(arr)
 //     return arr
 // }
 
-
-
 // console.log(console.log(bubbleSort([5, 4, 3, 2, 1]))); // Output: [1, 2, 3, 4, 5])
 
 // function insertionSort(arr){
 // for (let i=1;i<arr.length;arr++){
-//     const  currElemnt = arr[i] 
+//     const  currElemnt = arr[i]
 //     let j = i -1
 
 //     while(j>=0 && arr[j]>currElemnt){
@@ -126,7 +116,6 @@
 // console.log(arr)
 // return arr
 // }
-
 
 // console.log(insertionSort([5, 4, 3, 2, 1])); // Output: [1, 2, 3, 4, 5]
 
@@ -142,11 +131,10 @@
 //                 [arr[i],arr[minindex]] = [arr[minindex],arr[i]]
 //             }
 //         }
-        
+
 //     }
 
 // }
-
 
 // console.log(selectionsort([5, 4, 3, 2, 1])); // Output: [1, 2, 3, 4, 5]
 
@@ -158,12 +146,11 @@
 // let name = 'John';  // Can be reassigned
 // const age = 30;     // Cannot be reassigned
 
-
 // let str = "Hello"; // String
 // let num = 42; // Number
 // let isTrue = true; // Boolean
 
-// alert("Hello!"); 
+// alert("Hello!");
 // let age = prompt("How old are you?", 25);
 // let isConfirmed = confirm("Are you sure?");
 
@@ -184,7 +171,7 @@
 
 // let i = 0;
 // while (i < 5) {
-//     console.log(i); 
+//     console.log(i);
 //     i++;
 // }
 
@@ -193,6 +180,10 @@
 // }
 
 // open console to see
-for (let i = 0; i < 5; i++) {
-    console.log("value,", i);
-  }
+
+// for (let i = 0; i < 5; i++) {
+//   console.log("value,", i);
+//
+// console.log("hi");
+// console.log("hi");
+console.log("2");
