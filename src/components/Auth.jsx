@@ -45,10 +45,8 @@ const Auth = () => {
     if (!searchParams.get("signin") && !searchParams.get("signup")) {
       setSearchParams({ signin: "false" }); // Set the default query param
       setIsUser(true); // Set the state to "signin"
-    } else {
-      //   setIsUser(initialSignInState); // Set the state based on query param
     }
-  }, [searchParams, initialSignInState, setSearchParams]);
+  }, [searchParams, setSearchParams]);
 
   // Handle mode switch between Sign In and Sign Up
   const handleModeSwitch = () => {
@@ -69,7 +67,7 @@ const Auth = () => {
         {isUser ? "Sign Up" : "Sign In"}
       </h1>
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ email: "eve.holt@reqres.in", password: "pistol" }} // Default email and password
         validationSchema={validationSchema}
         onSubmit={isUser ? handleSignIn : handleSignUp}
       >
