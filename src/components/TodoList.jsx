@@ -1,17 +1,21 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import TodoItem from './TodoItem';
-import { fetchTodos } from '../features/todo/todoSlice';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import TodoItem from "./TodoItem";
+import { fetchTodos } from "../features/todo/todoSlice";
 
 const TodoList = () => {
   const dispatch = useDispatch();
-  const { todos, loading,fetchTodoLoading, error } = useSelector((state) => state.todos);
+  const { todos, loading, fetchTodoLoading, error } = useSelector(
+    (state) => state.todos
+  );
 
   // State for search query, selected date, completed filter, and date range filter
-  const [searchQuery, setSearchQuery] = useState('');
-  const [completedFilter, setCompletedFilter] = useState('all'); // 'all', 'true', or 'false'
-  const [startDate, setStartDate] = useState(''); // Start date for range filter
-  const [endDate, setEndDate] = useState(''); // End date for range filter
+  const [searchQuery, setSearchQuery] = useState("");
+  const [completedFilter, setCompletedFilter] = useState("all"); // 'all', 'true', or 'false'
+  const [startDate, setStartDate] = useState(""); // Start date for range filter
+  const [endDate, setEndDate] = useState(""); // End date for range filter
+  const [currentPage, setCurrentPage] = useState(1); // Track the current page
+  const todosPerPage = 5; // Number of todos to display per page
 
   useEffect(() => {
     dispatch(fetchTodos());
@@ -22,7 +26,7 @@ const TodoList = () => {
     if (!timestamp || !timestamp.seconds) return null;
 
     const date = new Date(timestamp.seconds * 1000);
-    return date.toISOString().split('T')[0];
+    return date.toISOString().split("T")[0];
   };
 
   // Function to check if a date is within a range
@@ -46,18 +50,34 @@ const TodoList = () => {
     const matchesDateRange = isDateInRange(todoDate, startDate, endDate); // Check if todo is in the date range
 
     const matchesCompleted =
-      completedFilter === 'all'
+      completedFilter === "all"
         ? true
-        : completedFilter === 'true'
+        : completedFilter === "true"
         ? todo.completed === true
         : todo.completed === false;
 
     return matchesSearchQuery && matchesDateRange && matchesCompleted;
   });
 
+  // Pagination logic
+  const totalPages = Math.ceil(filteredTodos.length / todosPerPage); // Calculate total number of pages
+  const indexOfLastTodo = currentPage * todosPerPage;
+  const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
+  const currentTodos = filteredTodos.slice(indexOfFirstTodo, indexOfLastTodo); // Get the todos for the current page
+
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages)); // Move to the next page
+  };
+
+  const handlePreviousPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1)); // Move to the previous page
+  };
+
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">Todo List</h2>
+      <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">
+        Todo List
+      </h2>
 
       {/* Search bar */}
       <input
@@ -101,12 +121,35 @@ const TodoList = () => {
       {error && <p className="text-red-500">{error}</p>}
 
       <ul className="divide-y divide-gray-200">
-        {filteredTodos.length > 0 ? (
-          filteredTodos.map((todo) => <TodoItem key={todo.id} todo={todo} />)
+        {currentTodos.length > 0 ? (
+          currentTodos.map((todo) => <TodoItem key={todo.id} todo={todo} />)
         ) : (
           <p>No todos match your search or filters.</p>
         )}
       </ul>
+
+      {/* Pagination controls */}
+      <div className="flex justify-between mt-4">
+        <button
+          onClick={handlePreviousPage}
+          disabled={currentPage === 1}
+          className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-400 focus:outline-none"
+        >
+          Previous
+        </button>
+
+        <span className="text-gray-700">
+          Page {currentPage} of {totalPages}
+        </span>
+
+        <button
+          onClick={handleNextPage}
+          disabled={currentPage === totalPages}
+          className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-400 focus:outline-none"
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };
