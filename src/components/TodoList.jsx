@@ -68,6 +68,18 @@ const TodoList = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
   };
 
+  const formatDateForInput = (dateString) => {
+    if (!dateString) return "";
+    const parts = dateString.split("/");
+    return `${parts[2]}-${parts[1]}-${parts[0]}`; // Convert to yyyy-mm-dd for input
+  };
+
+  const formatDateForDisplay = (dateString) => {
+    if (!dateString) return "";
+    const parts = dateString.split("-");
+    return `${parts[2]}/${parts[1]}/${parts[0]}`; // Convert to dd/mm/yyyy for display
+  };
+
   return (
     <div className="max-w-lg mx-auto mt-10 p-6 bg-gradient-to-br from-blue-100 via-white to-purple-100 shadow-xl rounded-2xl">
       <h2 className="text-3xl font-extrabold text-gray-900 mb-6 text-center">
@@ -88,18 +100,18 @@ const TodoList = () => {
         <div className="relative">
           <input
             type="date"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-            className="w-full px-4 py-3 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
+            value={formatDateForInput(startDate)} // Use the function to set the value for input
+            onChange={(e) => setStartDate(formatDateForDisplay(e.target.value))} // Format for storage
+            className="w-full px-8 py-3 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
           />
           <span className="absolute top-3 left-3 text-gray-500">📅</span>
         </div>
         <div className="relative">
           <input
             type="date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-            className="w-full px-4 py-3 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
+            value={formatDateForInput(endDate)} // Use the function to set the value for input
+            onChange={(e) => setEndDate(formatDateForDisplay(e.target.value))} // Format for storage
+            className="w-full px-8 py-3 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
           />
           <span className="absolute top-3 left-3 text-gray-500">📅</span>
         </div>
