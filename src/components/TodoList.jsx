@@ -2,9 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TodoItem from "./TodoItem";
 import { fetchTodos } from "../features/todo/todoSlice";
-import DatePicker from "react-datepicker"; // Import the DatePicker
-import "react-datepicker/dist/react-datepicker.css"; // Import the styles
-import { FaCalendarAlt } from "react-icons/fa"; // Import the calendar icon
 
 const TodoList = () => {
   const dispatch = useDispatch();
@@ -14,8 +11,8 @@ const TodoList = () => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [completedFilter, setCompletedFilter] = useState("all");
-  const [startDate, setStartDate] = useState(null); // Initialize with null
-  const [endDate, setEndDate] = useState(null); // Initialize with null
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const todosPerPage = 5;
 
@@ -88,27 +85,20 @@ const TodoList = () => {
 
       {/* Date range filter */}
       <div className="flex flex-col sm:flex-row sm:space-x-4 mb-4">
-        <div className="relative w-full sm:w-1/2">
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            placeholderText="Start date"
-            className="w-full px-5 py-3 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
-            dateFormat="MM/dd/yyyy" // Custom format
-          />
-          <FaCalendarAlt className="absolute right-3 top-3 text-gray-600" />
-        </div>
-
-        <div className="relative w-full sm:w-1/2">
-          <DatePicker
-            selected={endDate}
-            onChange={(date) => setEndDate(date)}
-            placeholderText="End date"
-            className="w-full px-5 py-3 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
-            dateFormat="MM/dd/yyyy" // Custom format
-          />
-          <FaCalendarAlt className="absolute right-3 top-3 text-gray-600" />
-        </div>
+        <input
+          type="date"
+          value={startDate}
+          onChange={(e) => setStartDate(e.target.value)}
+          placeholder="Start date"
+          className="w-full sm:w-1/2 px-4 py-3 mb-2 sm:mb-0 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300 text-sm sm:text-base"
+        />
+        <input
+          type="date"
+          value={endDate}
+          onChange={(e) => setEndDate(e.target.value)}
+          placeholder="End date"
+          className="w-full sm:w-1/2 px-4 py-3 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300 text-sm sm:text-base"
+        />
       </div>
 
       {/* Completed status filter */}
@@ -125,7 +115,8 @@ const TodoList = () => {
       {fetchTodoLoading && <p>Loading todos...</p>}
       {error && <p className="text-red-500">{error}</p>}
 
-      {/* Todo items */}
+      {/* Rest of the code remains unchanged */}
+
       <ul className="divide-y divide-gray-200">
         {currentTodos.length > 0 ? (
           currentTodos.map((todo) => <TodoItem key={todo.id} todo={todo} />)
