@@ -4,6 +4,7 @@ import TodoItem from "./TodoItem";
 import { fetchTodos } from "../features/todo/todoSlice";
 import DatePicker from "react-datepicker"; // Import the DatePicker
 import "react-datepicker/dist/react-datepicker.css"; // Import the styles
+import { FaCalendarAlt } from "react-icons/fa"; // Import the calendar icon
 
 const TodoList = () => {
   const dispatch = useDispatch();
@@ -87,20 +88,27 @@ const TodoList = () => {
 
       {/* Date range filter */}
       <div className="flex flex-col sm:flex-row sm:space-x-4 mb-4">
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          placeholderText="Start date"
-          className="w-full sm:w-1/2 px-4 py-3 mb-2 sm:mb-0 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
-          dateFormat="MM/dd/yyyy" // Custom format
-        />
-        <DatePicker
-          selected={endDate}
-          onChange={(date) => setEndDate(date)}
-          placeholderText="End date"
-          className="w-full sm:w-1/2 px-4 py-3 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
-          dateFormat="MM/dd/yyyy" // Custom format
-        />
+        <div className="relative w-full sm:w-1/2">
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            placeholderText="Start date"
+            className="w-full px-5 py-3 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
+            dateFormat="MM/dd/yyyy" // Custom format
+          />
+          <FaCalendarAlt className="absolute right-3 top-3 text-gray-600" />
+        </div>
+
+        <div className="relative w-full sm:w-1/2">
+          <DatePicker
+            selected={endDate}
+            onChange={(date) => setEndDate(date)}
+            placeholderText="End date"
+            className="w-full px-5 py-3 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
+            dateFormat="MM/dd/yyyy" // Custom format
+          />
+          <FaCalendarAlt className="absolute right-3 top-3 text-gray-600" />
+        </div>
       </div>
 
       {/* Completed status filter */}
