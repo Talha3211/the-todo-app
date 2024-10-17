@@ -2,17 +2,12 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTodo } from "../features/todo/todoSlice";
 import { toast, ToastContainer } from "react-toastify";
-import { useNavigation } from "react-router-dom"; // Import useNavigation
-
-// import { addTodo } from '../redux/todoSlice';
+import "react-toastify/dist/ReactToastify.css"; // Make sure toast styles are included
 
 const AddToDo = () => {
   const [title, setTitle] = useState("");
-  //   console.log(title)
   const dispatch = useDispatch();
-  const { addTodoLoading, loading, error } = useSelector(
-    (state) => state.todos
-  );
+  const { addTodoLoading, error } = useSelector((state) => state.todos);
 
   const handleAddTodo = () => {
     if (title === "") {
@@ -27,27 +22,30 @@ const AddToDo = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-xl font-bold text-gray-800 mb-4 text-center">
+    <div className="max-w-lg mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+      <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
         Add New Todo
       </h2>
-      <div className="flex items-center space-x-2">
+
+      <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Add new todo"
-          className="flex-grow p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full sm:flex-grow p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
+
         <button
           onClick={handleAddTodo}
-          className="bg-indigo-500 text-white px-3 py-2 rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
-          disabled={addTodoLoading} // Disable button while loading
+          className="w-full sm:w-auto bg-indigo-500 text-white px-6 py-3 rounded-lg hover:bg-indigo-600 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+          disabled={addTodoLoading}
         >
-          {addTodoLoading ? "adding..." : "Add Todo"}
+          {addTodoLoading ? "Adding..." : "Add Todo"}
         </button>
       </div>
-      {error && <p className="text-red-500">{error}</p>}
+
+      {error && <p className="text-red-500 mt-4">{error}</p>}
       <ToastContainer />
     </div>
   );

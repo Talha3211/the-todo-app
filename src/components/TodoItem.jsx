@@ -1,4 +1,3 @@
-// src/components/TodoItem.js
 import React from "react";
 import { useDispatch } from "react-redux";
 import { toggleTodo, deleteTodo } from "../features/todo/todoSlice";
@@ -14,32 +13,42 @@ const TodoItem = ({ todo }) => {
   const handleDelete = () => {
     dispatch(deleteTodo(todo.id));
   };
+
   console.log(auth.currentUser);
+
   return (
-    <div className="flex items-center justify-between p-4 bg-white shadow-md rounded-lg mb-4">
-      <span
-        className={`flex-grow ${
-          todo.completed ? "line-through text-gray-500" : "text-gray-800"
-        } text-lg`}
-      >
-        {todo.title}
-      </span>
-      <button
-        onClick={handleToggleCompleted}
-        className={`px-4 py-2 mr-2 rounded-lg ${
-          todo.completed
-            ? "bg-yellow-400 hover:bg-yellow-500"
-            : "bg-green-500 hover:bg-green-600"
-        } text-white`}
-      >
-        {todo.completed ? "Undo" : "Complete"}
-      </button>
-      <button
-        onClick={handleDelete}
-        className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg"
-      >
-        Delete
-      </button>
+    <div className="bg-gradient-to-r from-blue-100 via-white to-blue-50 shadow-xl rounded-lg p-6 mb-6">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+        {/* Task Title */}
+        <span
+          className={`text-lg font-semibold flex-grow mb-4 md:mb-0 ${
+            todo.completed ? "line-through text-gray-400" : "text-gray-900"
+          }`}
+        >
+          {todo.title}
+        </span>
+
+        {/* Action Buttons */}
+        <div className="flex gap-4">
+          <button
+            onClick={handleToggleCompleted}
+            className={`px-6 py-3 rounded-full text-white font-medium transition-transform transform-gpu duration-300 hover:scale-105 shadow-md ${
+              todo.completed
+                ? "bg-yellow-400 hover:bg-yellow-500"
+                : "bg-green-500 hover:bg-green-600"
+            }`}
+          >
+            {todo.completed ? "Undo" : "Complete"}
+          </button>
+
+          <button
+            onClick={handleDelete}
+            className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-full font-medium shadow-md transition-transform transform-gpu duration-300 hover:scale-105"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

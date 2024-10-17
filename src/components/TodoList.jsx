@@ -9,19 +9,17 @@ const TodoList = () => {
     (state) => state.todos
   );
 
-  // State for search query, selected date, completed filter, and date range filter
   const [searchQuery, setSearchQuery] = useState("");
-  const [completedFilter, setCompletedFilter] = useState("all"); // 'all', 'true', or 'false'
-  const [startDate, setStartDate] = useState(""); // Start date for range filter
-  const [endDate, setEndDate] = useState(""); // End date for range filter
-  const [currentPage, setCurrentPage] = useState(1); // Track the current page
-  const todosPerPage = 5; // Number of todos to display per page
+  const [completedFilter, setCompletedFilter] = useState("all");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const todosPerPage = 5;
 
   useEffect(() => {
     dispatch(fetchTodos());
   }, [dispatch]);
 
-  // Helper function to format Firestore Timestamp into YYYY-MM-DD
   const formatTodoDate = (timestamp) => {
     if (!timestamp || !timestamp.seconds) return null;
 
@@ -29,9 +27,8 @@ const TodoList = () => {
     return date.toISOString().split("T")[0];
   };
 
-  // Function to check if a date is within a range
   const isDateInRange = (date, startDate, endDate) => {
-    if (!startDate && !endDate) return true; // If no range is selected, show all dates
+    if (!startDate && !endDate) return true;
     if (startDate && endDate) {
       return date >= startDate && date <= endDate;
     }
@@ -40,14 +37,13 @@ const TodoList = () => {
     return true;
   };
 
-  // Filter todos based on the search query, date range, and completion status
   const filteredTodos = todos.filter((todo) => {
     const matchesSearchQuery = todo.title
       .toLowerCase()
       .includes(searchQuery.toLowerCase());
 
-    const todoDate = formatTodoDate(todo.created_at); // Assuming created_at is a Firestore Timestamp
-    const matchesDateRange = isDateInRange(todoDate, startDate, endDate); // Check if todo is in the date range
+    const todoDate = formatTodoDate(todo.created_at);
+    const matchesDateRange = isDateInRange(todoDate, startDate, endDate);
 
     const matchesCompleted =
       completedFilter === "all"
@@ -59,23 +55,22 @@ const TodoList = () => {
     return matchesSearchQuery && matchesDateRange && matchesCompleted;
   });
 
-  // Pagination logic
-  const totalPages = Math.ceil(filteredTodos.length / todosPerPage); // Calculate total number of pages
+  const totalPages = Math.ceil(filteredTodos.length / todosPerPage);
   const indexOfLastTodo = currentPage * todosPerPage;
   const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
-  const currentTodos = filteredTodos.slice(indexOfFirstTodo, indexOfLastTodo); // Get the todos for the current page
+  const currentTodos = filteredTodos.slice(indexOfFirstTodo, indexOfLastTodo);
 
   const handleNextPage = () => {
-    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages)); // Move to the next page
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
   };
 
   const handlePreviousPage = () => {
-    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1)); // Move to the previous page
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">
+    <div className="max-w-lg mx-auto mt-10 p-6 bg-gradient-to-br from-blue-100 via-white to-purple-100 shadow-xl rounded-2xl">
+      <h2 className="text-3xl font-extrabold text-gray-900 mb-6 text-center">
         Todo List
       </h2>
 
@@ -85,24 +80,24 @@ const TodoList = () => {
         placeholder="Search todos..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        className="w-full px-4 py-3 mb-4 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
       />
 
       {/* Date range filter */}
-      <div className="flex space-x-4 mb-4">
+      <div className="flex flex-col sm:flex-row sm:space-x-4 mb-4">
         <input
           type="date"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
           placeholder="Start date"
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full sm:w-1/2 px-4 py-3 mb-2 sm:mb-0 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
         />
         <input
           type="date"
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
           placeholder="End date"
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full sm:w-1/2 px-4 py-3 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
         />
       </div>
 
@@ -110,7 +105,7 @@ const TodoList = () => {
       <select
         value={completedFilter}
         onChange={(e) => setCompletedFilter(e.target.value)}
-        className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        className="w-full px-4 py-3 mb-4 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
       >
         <option value="all">All</option>
         <option value="true">Completed</option>
@@ -120,32 +115,36 @@ const TodoList = () => {
       {fetchTodoLoading && <p>Loading todos...</p>}
       {error && <p className="text-red-500">{error}</p>}
 
+      {/* Rest of the code remains unchanged */}
+
       <ul className="divide-y divide-gray-200">
         {currentTodos.length > 0 ? (
           currentTodos.map((todo) => <TodoItem key={todo.id} todo={todo} />)
         ) : (
-          <p>No todos match your search or filters.</p>
+          <p className="text-center text-gray-600">
+            No todos match your search or filters.
+          </p>
         )}
       </ul>
 
       {/* Pagination controls */}
-      <div className="flex justify-between mt-4">
+      <div className="flex justify-between items-center mt-6">
         <button
           onClick={handlePreviousPage}
           disabled={currentPage === 1}
-          className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-400 focus:outline-none"
+          className="px-5 py-3 bg-indigo-500 text-white rounded-full hover:bg-indigo-600 focus:outline-none transition-transform duration-200 transform hover:scale-105 disabled:bg-gray-300 disabled:cursor-not-allowed"
         >
           Previous
         </button>
 
-        <span className="text-gray-700">
+        <span className="text-gray-700 font-semibold">
           Page {currentPage} of {totalPages}
         </span>
 
         <button
           onClick={handleNextPage}
           disabled={currentPage === totalPages}
-          className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-400 focus:outline-none"
+          className="px-5 py-3 bg-indigo-500 text-white rounded-full hover:bg-indigo-600 focus:outline-none transition-transform duration-200 transform hover:scale-105 disabled:bg-gray-300 disabled:cursor-not-allowed"
         >
           Next
         </button>
