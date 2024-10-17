@@ -100,18 +100,20 @@ const TodoList = () => {
         <div className="relative">
           <input
             type="date"
-            value={formatDateForInput(startDate)} // Use the function to set the value for input
-            onChange={(e) => setStartDate(formatDateForDisplay(e.target.value))} // Format for storage
+            value={formatDateForInput(startDate)}
+            onChange={(e) => setStartDate(formatDateForDisplay(e.target.value))}
             className="w-full px-8 py-3 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
+            placeholder="Start Date (dd/mm/yyyy)"
           />
           <span className="absolute top-3 left-3 text-gray-500">📅</span>
         </div>
         <div className="relative">
           <input
             type="date"
-            value={formatDateForInput(endDate)} // Use the function to set the value for input
-            onChange={(e) => setEndDate(formatDateForDisplay(e.target.value))} // Format for storage
+            value={formatDateForInput(endDate)}
+            onChange={(e) => setEndDate(formatDateForDisplay(e.target.value))}
             className="w-full px-8 py-3 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
+            placeholder="End Date (dd/mm/yyyy)"
           />
           <span className="absolute top-3 left-3 text-gray-500">📅</span>
         </div>
