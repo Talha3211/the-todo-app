@@ -24,7 +24,7 @@ const TodoList = () => {
     if (!timestamp || !timestamp.seconds) return null;
 
     const date = new Date(timestamp.seconds * 1000);
-    return date.toISOString().split("T")[0];
+    return date.toLocaleDateString("en-GB"); // Format as dd/mm/yyyy
   };
 
   const isDateInRange = (date, startDate, endDate) => {
@@ -85,18 +85,24 @@ const TodoList = () => {
 
       {/* Date range filter */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-        <input
-          type="date"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
-          className="w-full px-4 py-3 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
-        />
-        <input
-          type="date"
-          value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
-          className="w-full px-4 py-3 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
-        />
+        <div className="relative">
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            className="w-full px-4 py-3 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
+          />
+          <span className="absolute top-3 left-3 text-gray-500">📅</span>
+        </div>
+        <div className="relative">
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            className="w-full px-4 py-3 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
+          />
+          <span className="absolute top-3 left-3 text-gray-500">📅</span>
+        </div>
       </div>
 
       {/* Completed status filter */}
