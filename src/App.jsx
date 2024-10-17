@@ -33,9 +33,9 @@ function App() {
               path="/"
               element={
                 <ProctectedRoute>
-                  <h1 className="text-4xl font-bold text-center text-indigo-600 mb-8">
+                  {/* <h1 className="text-4xl font-bold text-center text-indigo-600 mb-8">
                     Todo App
-                  </h1>
+                  </h1> */}
                   <AddToDo />
                   <TodoList />
                 </ProctectedRoute>
