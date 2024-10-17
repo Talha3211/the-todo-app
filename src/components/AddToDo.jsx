@@ -22,8 +22,8 @@ const AddToDo = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+    <div className="max-w-lg mx-auto mt-10 p-6 bg-gradient-to-br from-blue-50 via-white to-purple-100 shadow-2xl rounded-2xl">
+      <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
         Add New Todo
       </h2>
 
@@ -33,12 +33,14 @@ const AddToDo = () => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Add new todo"
-          className="w-full sm:flex-grow p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full sm:flex-grow p-4 bg-gradient-to-r from-purple-100 to-blue-100 border-none rounded-full shadow focus:outline-none focus:ring-4 focus:ring-indigo-400 transition-all"
         />
 
         <button
           onClick={handleAddTodo}
-          className="w-full sm:w-auto bg-indigo-500 text-white px-6 py-3 rounded-lg hover:bg-indigo-600 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+          className={`w-full sm:w-auto bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-6 py-3 rounded-full shadow-lg hover:from-indigo-600 hover:to-purple-600 focus:outline-none focus:ring-4 focus:ring-indigo-300 focus:ring-opacity-50 transition-all ${
+            addTodoLoading ? "cursor-not-allowed opacity-50" : ""
+          }`}
           disabled={addTodoLoading}
         >
           {addTodoLoading ? "Adding..." : "Add Todo"}
@@ -46,6 +48,7 @@ const AddToDo = () => {
       </div>
 
       {error && <p className="text-red-500 mt-4">{error}</p>}
+
       <ToastContainer />
     </div>
   );

@@ -33,29 +33,32 @@ const TodoNavbar = () => {
 
   return (
     <>
-      <ToastContainer /> {/* Ensure the ToastContainer is placed here */}
-      <nav className="bg-indigo-600 text-white shadow-lg">
+      <ToastContainer />
+      <nav className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-md fixed w-full z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
+            {/* App Title */}
             <div className="flex-shrink-0">
               <button
-                onClick={handleHomeClick} // Replace Link with button and handle manually
-                className="text-2xl font-bold hover:text-indigo-300"
+                onClick={handleHomeClick}
+                className="text-3xl font-extrabold tracking-tight text-white hover:text-purple-300 transition-colors duration-200"
               >
                 Todo App
               </button>
             </div>
-            <div className="hidden md:flex space-x-8">
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex space-x-6">
               <button
-                onClick={handleHomeClick} // Handle home navigation manually
-                className="text-lg font-medium hover:bg-indigo-500 px-3 py-2 rounded-md"
+                onClick={handleHomeClick}
+                className="text-lg font-medium bg-transparent px-4 py-2 rounded-full hover:bg-purple-500 hover:bg-opacity-30 transition-colors duration-300"
               >
                 Home
               </button>
               {!user ? (
                 <Link
                   to="/auth"
-                  className="text-lg font-medium hover:bg-indigo-500 px-3 py-2 rounded-md"
+                  className="text-lg font-medium bg-transparent px-4 py-2 rounded-full hover:bg-purple-500 hover:bg-opacity-30 transition-colors duration-300"
                 >
                   Auth
                 </Link>
@@ -65,18 +68,20 @@ const TodoNavbar = () => {
                     auth.signOut();
                     navigate("/auth");
                   }}
-                  className="text-lg font-medium hover:bg-indigo-500 px-3 py-2 rounded-md"
+                  className="text-lg font-medium bg-transparent px-4 py-2 rounded-full hover:bg-purple-500 hover:bg-opacity-30 transition-colors duration-300"
                 >
                   Sign Out
                 </button>
               )}
             </div>
+
+            {/* Mobile Menu Toggle */}
             <div className="md:hidden flex items-center">
               <button className="text-white focus:outline-none">
                 {!user ? (
                   <Link
                     to="/auth"
-                    className="text-lg font-medium hover:bg-indigo-500 px-3 py-2 rounded-md"
+                    className="text-lg font-medium bg-transparent px-4 py-2 rounded-full hover:bg-purple-500 hover:bg-opacity-30 transition-colors duration-300"
                   >
                     Auth
                   </Link>
@@ -86,25 +91,11 @@ const TodoNavbar = () => {
                       auth.signOut();
                       navigate("/auth");
                     }}
-                    className="text-lg font-medium hover:bg-indigo-500 px-3 py-2 rounded-md"
+                    className="text-lg font-medium bg-transparent px-4 py-2 rounded-full hover:bg-purple-500 hover:bg-opacity-30 transition-colors duration-300"
                   >
                     Sign Out
                   </button>
                 )}
-                {/* <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16m-7 6h7"
-                  ></path>
-                </svg> */}
               </button>
             </div>
           </div>
