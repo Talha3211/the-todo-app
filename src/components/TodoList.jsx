@@ -84,21 +84,18 @@ const TodoList = () => {
       />
 
       {/* Date range filter */}
-      <div className="flex flex-col sm:flex-row sm:space-x-4 mb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <input
           type="date"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
-          placeholder="Start date"
-          defaultValue={"mm/dd/yyyy"}
-          className="w-full sm:w-1/2 px-4 py-3 mb-2 sm:mb-0 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300 text-sm sm:text-base"
+          className="w-full px-4 py-3 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
         />
         <input
           type="date"
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
-          placeholder="End date"
-          className="w-full sm:w-1/2 px-4 py-3 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300 text-sm sm:text-base"
+          className="w-full px-4 py-3 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
         />
       </div>
 
@@ -115,8 +112,6 @@ const TodoList = () => {
 
       {fetchTodoLoading && <p>Loading todos...</p>}
       {error && <p className="text-red-500">{error}</p>}
-
-      {/* Rest of the code remains unchanged */}
 
       <ul className="divide-y divide-gray-200">
         {currentTodos.length > 0 ? (
