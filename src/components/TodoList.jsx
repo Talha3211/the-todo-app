@@ -90,6 +90,7 @@ const TodoList = () => {
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
           placeholder="Start date"
+          defaultValue={"mm/dd/yyyy"}
           className="w-full sm:w-1/2 px-4 py-3 mb-2 sm:mb-0 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300 text-sm sm:text-base"
         />
         <input
