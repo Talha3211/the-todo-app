@@ -22,7 +22,6 @@ const TodoList = () => {
 
   const formatTodoDate = (timestamp) => {
     if (!timestamp || !timestamp.seconds) return null;
-
     const date = new Date(timestamp.seconds * 1000);
     return date.toLocaleDateString("en-GB"); // Format as dd/mm/yyyy
   };
@@ -83,27 +82,33 @@ const TodoList = () => {
         className="w-full px-4 py-3 mb-4 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
       />
 
-      {/* Date range filter */}
+      {/* Date range filter with labels */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div className="relative">
+          <label className="text-gray-500" htmlFor="startDate">
+            Start Date
+          </label>
           <input
             type="date"
-            placeholder="start date"
+            id="startDate"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
             className="w-full px-8 py-3 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
           />
-          <span className="absolute top-3 left-3 text-gray-500">📅</span>
+          <span className="absolute top-9 left-3 text-gray-500">📅</span>
         </div>
         <div className="relative">
+          <label className="text-gray-500" htmlFor="endDate">
+            End Date
+          </label>
           <input
             type="date"
-            placeholder="end date"
+            id="endDate"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
             className="w-full  px-8 py-3 border-none bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full shadow focus:outline-none focus:ring-4 focus:ring-purple-400 transition-shadow duration-300"
           />
-          <span className="absolute top-3 left-3 text-gray-500">📅</span>
+          <span className="absolute top-9 left-3 text-gray-500">📅</span>
         </div>
       </div>
 
